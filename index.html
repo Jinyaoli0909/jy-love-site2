@@ -1,11 +1,3 @@
-git init
-git remote remove origin 2>nul || true
-git remote add origin https://github.com/jinyaoli0909/jy-love-site2.git
-git add .
-git commit -m "update site"
-git branch -M main
-git push -u origin main
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -153,6 +145,13 @@ git push -u origin main
       color: #666;
     }
 
+    .event img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
     /* 页脚 */
     footer {
       text-align: center;
@@ -209,12 +208,33 @@ git push -u origin main
   <!-- 时间线 -->
   <section class="timeline">
     <div class="event">
-      <h3>2024 · 我们的开始</h3>
-      <p>相遇是最美的意外。</p>
+      <img src="20250202.jpg" alt="我们在一起">
+      <h3>2025.02.02 · 我们在一起</h3>
+      <p>天降猪猪宝 ❤️</p>
     </div>
+
     <div class="event">
-      <h3>2025 · 小站上线</h3>
-      <p>记录下生活的点滴。</p>
+      <img src="yuanxiao.jpg" alt="元宵节">
+      <h3>2025.02.13 · 元宵节</h3>
+      <p>一起包元宵 好吃 但感觉抄手更好吃🥟</p>
+    </div>
+
+    <div class="event">
+      <img src="20250214.jpg" alt="情人节">
+      <h3>214 · 情人节</h3>
+      <p>第一次过情人节 💖</p>
+    </div>
+
+    <div class="event">
+      <img src="tba.jpg" alt="待补充">
+      <h3>2025.XX.XX · 待补充</h3>
+      <p>这一段可以填你们的重要小事件 ✨</p>
+    </div>
+
+    <div class="event">
+      <img src="wenzhou.jpg" alt="温州武夷山旅行">
+      <h3>2025.09 · 温州 & 武夷山旅行</h3>
+      <p>一起出游的美好回忆（还没更新图片） 🌄✈️</p>
     </div>
   </section>
 
@@ -224,7 +244,7 @@ git push -u origin main
 
   <script>
     // 纪念日倒计时
-    const anniversary = new Date("2024-09-19"); // 这里改成你们的纪念日
+    const anniversary = new Date("2025-02-02"); // 纪念日
     function updateCountdown() {
       const now = new Date();
       const diff = now - anniversary;
