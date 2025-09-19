@@ -1,16 +1,23 @@
+git init
+git remote remove origin 2>nul || true
+git remote add origin https://github.com/jinyaoli0909/jy-love-site2.git
+git add .
+git commit -m "update site"
+git branch -M main
+git push -u origin main
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>萌萌的伍健影 & 李金遥</title>
+  <title>伍健影 & 李金遥 · 我们的日常</title>
   <style>
-    /* 基础设置 */
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f9f9f9;
+      background-color: #f8f8f8;
       color: #333;
       line-height: 1.6;
     }
@@ -18,20 +25,32 @@
     header {
       text-align: center;
       padding: 3rem 1rem;
-      background: linear-gradient(135deg, #222, #444);
+      background: linear-gradient(135deg, #111, #444);
       color: white;
+      position: relative;
+      overflow: hidden;
     }
 
     header h1 {
       font-size: 2.5rem;
       margin: 0;
       letter-spacing: 2px;
+      animation: fadeIn 1.5s ease;
     }
 
     header p {
       font-size: 1rem;
       margin-top: 0.5rem;
       color: #ddd;
+      animation: fadeIn 2s ease;
+    }
+
+    header img {
+      margin-top: 1rem;
+      width: 160px;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      animation: float 4s ease-in-out infinite;
     }
 
     /* 相册区 */
@@ -50,6 +69,7 @@
       overflow: hidden;
       box-shadow: 0 6px 15px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
     .card:hover {
@@ -59,17 +79,78 @@
 
     .card img {
       width: 100%;
-      max-height: 320px;   /* 限制高度 */
-      object-fit: cover;   /* 保持比例裁剪 */
+      max-height: 320px;
+      object-fit: cover;
       display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
     }
 
     .card p {
       padding: 1rem;
       margin: 0;
       font-size: 1rem;
-      color: #555;
+      color: #444;
       text-align: center;
+    }
+
+    /* 纪念日 */
+    .countdown {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #fff;
+      margin: 2rem auto;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .countdown h2 {
+      margin-bottom: 1rem;
+    }
+
+    .countdown p {
+      font-size: 1.3rem;
+      color: #555;
+    }
+
+    /* 时间线 */
+    .timeline {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 1rem;
+      border-left: 3px solid #aaa;
+    }
+
+    .event {
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .event::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      background: #444;
+      border-radius: 50%;
+      position: absolute;
+      left: -9px;
+      top: 6px;
+    }
+
+    .event h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+    }
+
+    .event p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #666;
     }
 
     /* 页脚 */
@@ -81,29 +162,25 @@
     }
 
     /* 动效 */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .card {
-      animation: fadeInUp 0.8s ease both;
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>萌萌的伍健影 & 李金遥</h1>
-    <p>记录我们的日常 · To be continued</p>
-  <img src="together.jpg" alt="哇塞">
+    <h1>伍健影 & 李金遥</h1>
+    <p>我们的专属小站 · 每天都在继续</p>
+    <img src="together.jpg" alt="我们俩">
   </header>
 
+  <!-- 相册 -->
   <section class="gallery">
     <div class="card">
       <img src="wjy.jpg" alt="伍健影力量大">
@@ -114,17 +191,49 @@
       <p>小猪时刻 🐷</p>
     </div>
     <div class="card">
-      <img src="climb.jpg" alt="哇风景真好呀">
+      <img src="climb.jpg" alt="风景好">
       <p>哇风景真好呀 🌄</p>
     </div>
     <div class="card">
-      <img src="cook.jpg" alt="宝宝做饭中">
+      <img src="cook.jpg" alt="做饭">
       <p>很会做饭的宝宝 👩‍🍳</p>
     </div>
   </section>
 
+  <!-- 纪念日倒计时 -->
+  <section class="countdown">
+    <h2>我们的纪念日</h2>
+    <p id="days">Loading...</p>
+  </section>
+
+  <!-- 时间线 -->
+  <section class="timeline">
+    <div class="event">
+      <h3>2024 · 我们的开始</h3>
+      <p>相遇是最美的意外。</p>
+    </div>
+    <div class="event">
+      <h3>2025 · 小站上线</h3>
+      <p>记录下生活的点滴。</p>
+    </div>
+  </section>
+
   <footer>
-    <p>© 2025 萌萌的伍健影 & 李金遥 | 我们的专属小站</p>
+    <p>© 2025 伍健影 & 李金遥 | Love Journey</p>
   </footer>
+
+  <script>
+    // 纪念日倒计时
+    const anniversary = new Date("2024-09-19"); // 这里改成你们的纪念日
+    function updateCountdown() {
+      const now = new Date();
+      const diff = now - anniversary;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("days").textContent =
+        "我们已经在一起 " + days + " 天啦 ❤️";
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 86400000); // 每天更新一次
+  </script>
 </body>
 </html>
