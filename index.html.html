@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>萌萌的伍健影 & 李金遥</title>
+  <style>
+    /* 基础设置 */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #222, #444);
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: #ddd;
+    }
+
+    /* 相册区 */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      width: 100%;
+      max-height: 320px;   /* 限制高度 */
+      object-fit: cover;   /* 保持比例裁剪 */
+      display: block;
+    }
+
+    .card p {
+      padding: 1rem;
+      margin: 0;
+      font-size: 1rem;
+      color: #555;
+      text-align: center;
+    }
+
+    /* 页脚 */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* 动效 */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      animation: fadeInUp 0.8s ease both;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>萌萌的伍健影 & 李金遥</h1>
+    <p>记录我们的日常 · To be continued</p>
+  <img src="together.jpg" alt="哇塞">
+  </header>
+
+  <section class="gallery">
+    <div class="card">
+      <img src="wjy.jpg" alt="伍健影力量大">
+      <p>伍健影力量大 💪</p>
+    </div>
+    <div class="card">
+      <img src="ljy.jpg" alt="小猪时刻">
+      <p>小猪时刻 🐷</p>
+    </div>
+    <div class="card">
+      <img src="climb.jpg" alt="哇风景真好呀">
+      <p>哇风景真好呀 🌄</p>
+    </div>
+    <div class="card">
+      <img src="cook.jpg" alt="宝宝做饭中">
+      <p>很会做饭的宝宝 👩‍🍳</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 萌萌的伍健影 & 李金遥 | 我们的专属小站</p>
+  </footer>
+</body>
+</html>
